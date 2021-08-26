@@ -1,95 +1,30 @@
-// Aula 09 26/08/2021 CHECKPOINT
-// Rafael Nobre Queiroz
+const pratos = {
+  1: { nome: 'Pipoca', tempo: 10 },
+  2: { nome: 'Macarrão', tempo: 8 },
+  3: { nome: 'Carne', tempo: 15 },
+  4: { nome: 'Feijão', tempo: 12 },
+  5: { nome: 'Brigadeiro', tempo: 8 },
+};
 
-/********************************
-/****  Padrões do Microondas ****
-*********************************/
-const PIPOCA = 1;
-const MACARRAO = 2;
-const CARNE = 3;
-const FEIJAO = 4;
-const BRIGADEIRO = 5;
+function fazerPrato(numeroPrato, tempo) {
+  const prato = pratos[numeroPrato];
 
-const TEMPO_PADRAO_PIPOCA = 10;
-const TEMPO_PADRAO_MACARRAO = 8;
-const TEMPO_PADRAO_CARNE = 15;
-const TEMPO_PADRAO_FEIJAO = 12;
-const TEMPO_PADRAO_BRIGADEIRO = 8;
-
-const MENSAGEM_TEMPO_INSUFICIENTE = 'Tempo insuficiente';
-const MENSAGEM_COMIDA_QUEIMOU = 'A comida queimou';
-const MENSAGEM_EXPLODIU = 'Kabummm';
-const MENSAGEM_PRATO_INEXISTENTE = 'Prato inexistente';
-const MENSAGEM_SUCESSO = 'Prato pronto, bom apetite!!!';
-
-/******************
-/**** Lógica *****
-******************/
-
-function exibirMensagem(texto) {
-  console.log(texto);
-}
-
-function fazerPrato(prato, tempo) {
-  if (prato === PIPOCA) {
-    if (tempo > 2 * TEMPO_PADRAO_PIPOCA && tempo <= 3 * TEMPO_PADRAO_PIPOCA) {
-      return exibirMensagem(MENSAGEM_COMIDA_QUEIMOU);
-    } else if (tempo < TEMPO_PADRAO_PIPOCA) {
-      return exibirMensagem(MENSAGEM_TEMPO_INSUFICIENTE);
-    } else if (tempo > 3 * TEMPO_PADRAO_PIPOCA) {
-      return exibirMensagem(MENSAGEM_EXPLODIU);
-    }
-  } else if (prato === MACARRAO) {
-    if (tempo > 2 * TEMPO_PADRAO_MACARRAO && tempo <= 3 * TEMPO_PADRAO_MACARRAO) {
-      return exibirMensagem(MENSAGEM_COMIDA_QUEIMOU);
-    } else if (tempo < TEMPO_PADRAO_MACARRAO) {
-      return exibirMensagem(MENSAGEM_TEMPO_INSUFICIENTE);
-    } else if (tempo > 3 * TEMPO_PADRAO_MACARRAO) {
-      return exibirMensagem(MENSAGEM_EXPLODIU);
-    }
-  } else if (prato === CARNE) {
-    if (tempo > 2 * TEMPO_PADRAO_CARNE && tempo <= 3 * TEMPO_PADRAO_CARNE) {
-      return exibirMensagem(MENSAGEM_COMIDA_QUEIMOU);
-    } else if (tempo < TEMPO_PADRAO_CARNE) {
-      return exibirMensagem(MENSAGEM_TEMPO_INSUFICIENTE);
-    } else if (tempo > 3 * TEMPO_PADRAO_CARNE) {
-      return exibirMensagem(MENSAGEM_EXPLODIU);
-    }
-  } else if (prato === FEIJAO) {
-    if (tempo > 2 * TEMPO_PADRAO_FEIJAO && tempo <= 3 * TEMPO_PADRAO_FEIJAO) {
-      return exibirMensagem(MENSAGEM_COMIDA_QUEIMOU);
-    } else if (tempo < TEMPO_PADRAO_FEIJAO) {
-      return exibirMensagem(MENSAGEM_TEMPO_INSUFICIENTE);
-    } else if (tempo > 3 * TEMPO_PADRAO_FEIJAO) {
-      return exibirMensagem(MENSAGEM_EXPLODIU);
-    }
-  } else if (prato === BRIGADEIRO) {
-    if (tempo > 2 * TEMPO_PADRAO_BRIGADEIRO && tempo <= 3 * TEMPO_PADRAO_BRIGADEIRO) {
-      return exibirMensagem(MENSAGEM_COMIDA_QUEIMOU);
-    } else if (tempo < TEMPO_PADRAO_BRIGADEIRO) {
-      return exibirMensagem(MENSAGEM_TEMPO_INSUFICIENTE);
-    } else if (tempo > 3 * TEMPO_PADRAO_BRIGADEIRO) {
-      return exibirMensagem(MENSAGEM_EXPLODIU);
-    }
-  } else {
-    return exibirMensagem(MENSAGEM_PRATO_INEXISTENTE);
+  if (!prato) {
+    return console.log('Prato inexistente');
   }
 
-  return exibirMensagem(MENSAGEM_SUCESSO);
+  let mensagem;
+  const tempoPadrao = prato.tempo;
+
+  if (tempo < tempoPadrao) {
+    mensagem = 'Tempo insuficiente';
+  } else if (tempo > tempoPadrao * 2 && tempo <= tempoPadrao * 3) {
+    mensagem = 'A comida queimou';
+  } else if (tempo > tempoPadrao * 3) {
+    mensagem = 'Kabummm';
+  } else {
+    mensagem = 'Prato pronto, bom apeite!!!';
+  }
+
+  return console.log(mensagem);
 }
-
-/*******************************
-/****  Escolhas do Usuário *****
-********************************/
-
-// Prato existente com tempo padrão
-fazerPrato(FEIJAO, TEMPO_PADRAO_FEIJAO);
-
-// Prato existente com tempo maior que o dobro
-fazerPrato(FEIJAO, TEMPO_PADRAO_FEIJAO + 15);
-
-// Prato existente com tempo maior que o triplo
-fazerPrato(FEIJAO, TEMPO_PADRAO_FEIJAO + 25);
-
-// Prato Inexistente
-fazerPrato('Peixe', 10);
